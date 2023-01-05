@@ -7,6 +7,8 @@ WORKDIR /opt/app
 
 COPY ./ /opt/app
 
+RUN mvn clean install -DskipTests
+
 
 # Docker Build Stage
 FROM openjdk:8-jdk-alpine
