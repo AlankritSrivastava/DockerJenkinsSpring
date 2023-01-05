@@ -15,8 +15,8 @@ node {
 
           stage('Deploy docker'){
                   echo "Docker Image Tag Name: ${dockerImageTag}"
-                  sh "docker stop springapp || true && docker rm springapp || true"
-                  sh "docker run --name springapp -d -p 8080:8080 springapp:${env.BUILD_NUMBER}"
+                  bat "docker stop springapp || true && docker rm springapp || true"
+                  bat "docker run --name springapp -d -p 8080:8080 springapp:${env.BUILD_NUMBER}"
           }
     }catch(e){
         throw e
