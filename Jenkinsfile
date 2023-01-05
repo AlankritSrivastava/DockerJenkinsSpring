@@ -1,6 +1,6 @@
 node {
     def WORKSPACE = "/var/lib/jenkins/workspace/SpringApp"
-    def dockerImageTag = "springapp${env.BUILD_NUMBER}"
+    def dockerImageTag = "springdocker${env.BUILD_NUMBER}"
 
     try{
          stage('Clone Repo') {
@@ -10,13 +10,13 @@ node {
                 branch: 'master'
          }
           stage('Build docker') {
-                 dockerImage = docker.build("springapp:${env.BUILD_NUMBER}")
+                 dockerImage = docker.build("springdocker:${env.BUILD_NUMBER}")
           }
 
           stage('Deploy docker'){
                   echo "Docker Image Tag Name: ${dockerImageTag}"
-                  bat "docker stop springapp || exit 0 && docker rm springapp || exit 0"
-                  bat "docker run --name springapp -d -p 8081:8080 springapp:${env.BUILD_NUMBER}"
+                  bat "docker stop springdocker || exit 0 && docker rm springdocker || exit 0"
+                  bat "docker run --name springdocker -d -p 8081:8080 springdocker:${env.BUILD_NUMBER}"
           }
     }catch(e){
         throw e
